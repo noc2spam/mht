@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply bg-[#dee1c9];
+}
+h1 {
+  @apply font-bold text-[2.7rem] leading-[3.1rem];
+}
+h2 {
+  @apply font-bold text-4xl leading-[3.2rem];
+}
+h3 {
+  @apply text-3xl font-semibold;
+}
+h4 {
+  @apply font-[500] text-xl;
+}
+p,
+button,
+h5,
+li {
+  @apply font-normal text-lg md:text-xl tracking-tight leading-[2rem];
+}
+label {
+  @apply font-normal;
+}
+small {
+  @apply text-lg font-normal sm:text-xs;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+button {
+  @apply my-1;
+}
+p {
+  @apply my-4;
+}
+li {
+  @apply my-2;
+}
+b,
+strong {
+  @apply font-medium;
+}
+ol {
+  li {
+    @apply pl-2 list-decimal list-inside md:pl-4;
+  }
+}
+ul.dotted {
+  li {
+    @apply pl-2 list-disc list-inside md:pl-4;
+  }
+}
