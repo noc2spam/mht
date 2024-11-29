@@ -38,7 +38,6 @@ export default async function handler(req: Request, res: Response) {
     activity_duration: z.number().min(0).max(24).optional().default(0),
     socialized_for: z.number().min(0).max(24).optional().default(0),
   });
-  const body = req.body;
   const validatedData = schema.safeParse(req.body);
   if (!validatedData.success) {
     return res.status(400).json({
