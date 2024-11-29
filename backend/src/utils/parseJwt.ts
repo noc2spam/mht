@@ -4,7 +4,6 @@ export default async function parseJwt(token: string) {
     GOOGLE_CLIENT_ID = "",
     GOOGLE_CLIENT_SECRET = "",
     NEXT_PUBLIC_BACKEND_URL = "http://localhost:3001",
-    FRONTEND_URL = "http://localhost:3000",
   } = process.env;
   const oAuth2Client = new OAuth2Client(
     GOOGLE_CLIENT_ID,
