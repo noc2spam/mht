@@ -11,7 +11,7 @@ export default async function handler(req: Request, res: Response) {
     });
   }
 
-  const user = parseJwt(bearerToken);
+  const user = await parseJwt(bearerToken);
   if (!user) {
     return res.status(401).json({
       status: "error",
