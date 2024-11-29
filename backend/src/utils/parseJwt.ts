@@ -22,6 +22,5 @@ export default async function parseJwt(token: string) {
   if (!payload) {
     return null;
   }
-  console.log(payload);
   return payload;
 }
