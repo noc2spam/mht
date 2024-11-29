@@ -1,12 +1,17 @@
+"use server";
 import LoginButton from "@/components/LoginButton";
-import { getServerSession } from "next-auth";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const session = await getServerSession();
-  if (session?.user) {
-    redirect("/app/dashboard/");
+async function redirectIfLoggedIn() {
+  const cookie = cookies().get("token");
+  if (cookie && cookie.value.length > 0) {
+    redirect("/app/dashboard");
   }
+}
+
+export default async function Home() {
+  await redirectIfLoggedIn();
   return (
     <main className="min-h-svh container mx-auto grid place-items-center">
       <div className="bg-white rounded-lg shadow-lg p-6 max-w-[700px] mt-12 text-center">

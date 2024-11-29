@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  emailVerified Boolean @default(false) @map("email_verified")
+  name          String?
+  posts         Log[]
+}
+
+model Log {
+  id                       Int      @id @default(autoincrement())
+  moodRating               Int      @default(0) @map("mood_rating")
+  anxietyLevel             Int      @default(0) @map("anxiety_level")
+  sleptHours               Int      @default(0) @map("slept_hours")
+  qualityOgSleep           Int      @default(0) @map("quality_of_sleep")
+  disturbances             Int      @default(0)
+  physicalActivityType     String?  @map("physical_activity_type")
+  physicalActivityDuration Int?     @map("physical_activity_duration")
+  socializedFor            Int      @default(0) @map("socialized_for")
+  userId                   Int      @map("user_id")
+  user                     User     @relation(fields: [userId], references: [id])
+  createdAt                DateTime @default(now()) @map("created_at")
+  updatedAt                DateTime @default(now()) @map("updated_at")
+}
