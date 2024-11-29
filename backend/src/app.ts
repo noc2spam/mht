@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import logsAction from "./actions/logs.post";
+import logsListAction from "./actions/logs.get";
+import logsCreateAction from "./actions/log.post";
 import authUrlAction from "./actions/auth/google/url";
 import authCallbackAction from "./actions/auth/google/callback";
 
@@ -25,11 +26,8 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(express.json());
-app.post("/log", (req, res) => {
-  console.log(req.body);
-  res.send("Logged");
-});
-app.get("/logs", logsAction);
+app.get("/logs", logsListAction);
+app.post("/log", logsCreateAction);
 app.get("/auth/google/url", authUrlAction);
 app.get("/auth/google/callback", authCallbackAction);
 app.listen(port, () => {

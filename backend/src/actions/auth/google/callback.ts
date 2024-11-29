@@ -5,7 +5,7 @@ import { prisma } from "../../../utils/client";
 const {
   GOOGLE_CLIENT_ID = "",
   GOOGLE_CLIENT_SECRET = "",
-  AUTH_URL = "http://localhost:3001",
+  NEXT_PUBLIC_BACKEND_URL = "http://localhost:3001",
   FRONTEND_URL = "http://localhost:3000",
 } = process.env;
 
@@ -17,7 +17,7 @@ export default async function handler(req: Request, res: Response) {
   const oAuth2Client = new OAuth2Client(
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
-    AUTH_URL + "/auth/google/callback"
+    NEXT_PUBLIC_BACKEND_URL + "/auth/google/callback"
   );
   const response = await oAuth2Client.getToken(code);
   if (!response.tokens) {
@@ -39,10 +39,12 @@ export default async function handler(req: Request, res: Response) {
     },
     update: {
       name: payload.name,
+      emailVerified: payload.email_verified,
     },
     create: {
       email: payload.email,
       name: payload.name,
+      emailVerified: payload.email_verified,
     },
   });
   const redirectURL = `${FRONTEND_URL}/?token=${tokens.id_token}`;

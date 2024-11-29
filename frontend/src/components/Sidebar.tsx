@@ -2,6 +2,7 @@
 import { useUserContext } from "@/context";
 import Image from "next/image";
 import Link from "next/link";
+import ActivityPopup from "./ActivityPopup";
 
 export default function Sidebar() {
   const { user } = useUserContext();
@@ -24,10 +25,10 @@ export default function Sidebar() {
 
       <ul className="my-12">
         <li>
-          <Link href="/">Dashboard</Link>
+          <Link href="/app/dashboard">Dashboard</Link>
         </li>
         <li>
-          <Link href="/">Create Log</Link>
+          <ActivityPopup />
         </li>
         <li>
           <Link
