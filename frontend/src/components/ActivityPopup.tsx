@@ -68,11 +68,7 @@ export default function ActivityPopup() {
   }
   return (
     <>
-      <button
-        onClick={() => setShown(true)}
-        type="button"
-        className="cursor-pointer"
-      >
+      <button onClick={() => setShown(true)} type="button">
         Create log
       </button>
       {shown && (

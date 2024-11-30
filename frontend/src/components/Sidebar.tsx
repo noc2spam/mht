@@ -7,7 +7,7 @@ import ActivityPopup from "./ActivityPopup";
 export default function Sidebar() {
   const { user } = useUserContext();
   return (
-    <nav className="bg-[#2d2040] text-white py-2 font-medium text-2xl w-[400px] px-4">
+    <nav className="bg-gradient-to-bl from-gray-800 to-gray-900 text-white py-2 font-medium text-2xl w-64 px-4">
       {user && (
         <div className="w-full flex items-center gap-2">
           {user.image && (
