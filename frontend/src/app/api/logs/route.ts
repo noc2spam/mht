@@ -8,7 +8,6 @@ export async function GET() {
   }
 
   const { NEXT_PUBLIC_BACKEND_URL = "http:/localhost:3001" } = process.env;
-  console.log(NEXT_PUBLIC_BACKEND_URL + "/logs");
   const response = await fetch(NEXT_PUBLIC_BACKEND_URL + "/logs", {
     method: "GET",
     headers: {

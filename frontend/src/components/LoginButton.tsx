@@ -1,9 +1,9 @@
 "use client";
 import AppIcon from "@/components/AppIcon";
 import { useEffect, useState } from "react";
-const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
+
 export default function LoginButton() {
-  "use client";
+  const NEXT_PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
   const [googleUrl, setGoogleUrl] = useState("");
   useEffect(() => {
     fetch(NEXT_PUBLIC_BACKEND_URL + "/auth/google/url")

@@ -2,14 +2,14 @@ import { OAuth2Client } from "google-auth-library";
 import { Request, Response } from "express";
 import { prisma } from "../../../utils/client";
 
-const {
-  GOOGLE_CLIENT_ID = "",
-  GOOGLE_CLIENT_SECRET = "",
-  NEXT_PUBLIC_BACKEND_URL = "http://localhost:3001",
-  FRONTEND_URL = "http://localhost:3000",
-} = process.env;
-
 export default async function handler(req: Request, res: Response) {
+  const {
+    GOOGLE_CLIENT_ID = "",
+    GOOGLE_CLIENT_SECRET = "",
+    NEXT_PUBLIC_BACKEND_URL = "http://localhost:3001",
+    FRONTEND_URL = "http://localhost:3000",
+  } = process.env;
+
   const code = req.query.code;
   if (!code || typeof code !== "string") {
     return res.status(400).json({ status: "error", message: "Invalid code" });
