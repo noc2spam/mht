@@ -76,7 +76,7 @@ export default function RatingInput({
                   (hiddenInput.current as HTMLInputElement).value = String(i);
               }}
               className={twMerge(
-                "block  text-white bg-gray-500 rounded-full p-2",
+                "block  text-white bg-gray-500 rounded-full p-1 sm:p-2",
                 rating && rating >= i ? colorMap[i] : ""
               )}
             >
@@ -85,7 +85,7 @@ export default function RatingInput({
                 className="w-full max-w-8 h-full text-white"
               />
             </button>
-            <div className="text-xs w-full text-center text-wrap text-gray-500">
+            <div className="text-xs w-full text-center text-wrap text-gray-500 md:block hidden">
               {ratingInWords[i]}
             </div>
           </div>
