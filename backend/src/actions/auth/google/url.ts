@@ -13,7 +13,7 @@ export default function handler(req: Request, res: Response) {
     NEXT_PUBLIC_BACKEND_URL + "/auth/google/callback"
   );
   const authorizeUrl = oAuth2Client.generateAuthUrl({
-    access_type: "offline",
+    access_type: "online",
     scope:
       "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
   });
