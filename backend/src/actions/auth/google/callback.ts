@@ -19,34 +19,41 @@ export default async function handler(req: Request, res: Response) {
     GOOGLE_CLIENT_SECRET,
     NEXT_PUBLIC_BACKEND_URL + "/auth/google/callback"
   );
-  const response = await oAuth2Client.getToken(code);
-  if (!response.tokens) {
-    return res.status(400).json({ status: "error", message: "Invalid code" });
+  try {
+    const response = await oAuth2Client.getToken(code);
+    if (!response.tokens) {
+      return res.status(400).json({ status: "error", message: "Invalid code" });
+    }
+    const { tokens } = response;
+    oAuth2Client.setCredentials(tokens);
+    const userInfo = await oAuth2Client.verifyIdToken({
+      idToken: tokens.id_token || "",
+      audience: GOOGLE_CLIENT_ID,
+    });
+    const payload = userInfo.getPayload();
+    if (!userInfo || !payload || !payload.email || !payload.name) {
+      return res.status(400).json({ status: "error", message: "Invalid code" });
+    }
+    await prisma.user.upsert({
+      where: {
+        email: payload.email,
+      },
+      update: {
+        name: payload.name,
+        emailVerified: payload.email_verified,
+      },
+      create: {
+        email: payload.email,
+        name: payload.name,
+        emailVerified: payload.email_verified,
+      },
+    });
+    const redirectURL = `${FRONTEND_URL}/?token=${tokens.id_token}`;
+    res.redirect(redirectURL);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ status: "error", message: "Internal server error" });
   }
-  const { tokens } = response;
-  oAuth2Client.setCredentials(tokens);
-  const userInfo = await oAuth2Client.verifyIdToken({
-    idToken: tokens.id_token || "",
-    audience: GOOGLE_CLIENT_ID,
-  });
-  const payload = userInfo.getPayload();
-  if (!userInfo || !payload || !payload.email || !payload.name) {
-    return res.status(400).json({ status: "error", message: "Invalid code" });
-  }
-  await prisma.user.upsert({
-    where: {
-      email: payload.email,
-    },
-    update: {
-      name: payload.name,
-      emailVerified: payload.email_verified,
-    },
-    create: {
-      email: payload.email,
-      name: payload.name,
-      emailVerified: payload.email_verified,
-    },
-  });
-  const redirectURL = `${FRONTEND_URL}/?token=${tokens.id_token}`;
-  res.redirect(redirectURL);
 }
