@@ -1,4 +1,3 @@
-import parseJwt from "@/utils/parseJwt";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
