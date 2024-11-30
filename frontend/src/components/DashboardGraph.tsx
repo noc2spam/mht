@@ -74,79 +74,51 @@ export default function DashboardGraph() {
                 bottom: "3%",
                 containLabel: true,
               },
-              xAxis: [
-                {
-                  type: "category",
-                  boundaryGap: false,
-                  data: responseData.logs.map(
-                    (log) => log.createdAt.split("T")[0]
-                  ),
-                },
-              ],
-              yAxis: [
-                {
-                  type: "value",
-                },
-              ],
+              xAxis: {
+                type: "category",
+                boundaryGap: false,
+                data: responseData.logs.map(
+                  (log) => log.createdAt.split("T")[0]
+                ),
+              },
+              yAxis: {
+                type: "value",
+              },
               series: [
                 {
                   name: "Mood Rating",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.moodRating),
                 },
                 {
                   name: "Anxiety Level",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.anxietyLevel),
                 },
                 {
                   name: "Slept Hours",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.sleptHours),
                 },
                 {
                   name: "Quality Of Sleep",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.qualityOfSleep),
                 },
                 {
                   name: "Disturbances",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.disturbances),
                 },
                 {
                   name: "Physical Activity Duration",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map(
                     (log) => log.physicalActivityDuration
                   ),
@@ -154,11 +126,7 @@ export default function DashboardGraph() {
                 {
                   name: "Socialized For",
                   type: "line",
-                  stack: "Total",
                   areaStyle: {},
-                  emphasis: {
-                    focus: "series",
-                  },
                   data: responseData.logs.map((log) => log.socializedFor),
                 },
               ],
