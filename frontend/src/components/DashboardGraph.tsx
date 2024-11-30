@@ -5,9 +5,13 @@ export default function DashboardGraph() {
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
-      await fetch("/api/logs")
-        .then((response) => response.json())
-        .then((data) => setData(data));
+      try {
+        await fetch("/api/logs")
+          .then((response) => response.json())
+          .then((data) => setData(data));
+      } catch (error) {
+        console.error(error);
+      }
     })();
   }, []);
   return <pre>{JSON.stringify(data, null, 4)}</pre>;

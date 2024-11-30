@@ -15,6 +15,7 @@ export async function GET() {
       Authorization: `Bearer ${cookie.value}`,
     },
   }).catch(() => {
+    cookieStore.delete("token");
     return new Response(JSON.stringify({ status: "fail", loggedIn: false }), {
       status: 500,
     });
