@@ -174,7 +174,9 @@ export default function DashboardGraph() {
   return (
     <div className="w-full p-8">
       {chartOption !== undefined && !zeroData && (
-        <ReactECharts option={chartOption} />
+        <div className="bg-white p-4 rounded-lg">
+          <ReactECharts option={chartOption} />
+        </div>
       )}
       {zeroData && (
         <div className="w-full h-[80vh] grid place-items-center">
