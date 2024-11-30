@@ -22,6 +22,9 @@ export default async function handler(req: Request, res: Response) {
         email: user.email,
       },
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
   res.status(200).json({ status: "success", logs: logs });
 }

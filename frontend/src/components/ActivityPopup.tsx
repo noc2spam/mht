@@ -39,6 +39,7 @@ export default function ActivityPopup() {
       method: "POST",
       body: JSON.stringify(formData),
     });
+    document.location.reload();
   }
   function possibleToGoNext(index: number, data: typeof formData) {
     switch (index) {

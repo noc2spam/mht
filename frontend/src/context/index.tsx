@@ -31,6 +31,7 @@ export function LoggedInProvider({ children }: { children: React.ReactNode }) {
     fetch("/api/auth/profile")
       .then(async (res) => {
         const response = await res.json();
+
         return response as {
           status: string;
           user: {
