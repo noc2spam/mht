@@ -25,6 +25,7 @@ export default async function handler(req: Request, res: Response) {
       return res.status(400).json({ status: "error", message: "Invalid code" });
     }
     const { tokens } = response;
+    const redirectURL = `${FRONTEND_URL}/?token=${tokens.id_token}`;
     oAuth2Client.setCredentials(tokens);
     const userInfo = await oAuth2Client.verifyIdToken({
       idToken: tokens.id_token || "",
@@ -48,12 +49,10 @@ export default async function handler(req: Request, res: Response) {
         emailVerified: payload.email_verified,
       },
     });
-    const redirectURL = `${FRONTEND_URL}/?token=${tokens.id_token}`;
+
     res.redirect(redirectURL);
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ status: "error", message: "Internal server error" });
+    res.redirect(`${FRONTEND_URL}/`);
   }
 }
