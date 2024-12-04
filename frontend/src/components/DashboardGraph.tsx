@@ -13,9 +13,12 @@ export default function DashboardGraph() {
       try {
         await fetch("/api/logs")
           .then((response) => response.json())
-          .then((data) => {
-            if (data.status !== "success" || !data.logs) {
-              document.location.href = "/";
+          .then(async (data) => {
+            if (data.status !== "success") {
+              await fetch("/api/auth/logout", {
+                method: "POST",
+              });
+              document.location.reload();
               return;
             }
             const responseData = data as {

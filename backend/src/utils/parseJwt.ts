@@ -11,10 +11,14 @@ export default async function parseJwt(token: string) {
     NEXT_PUBLIC_BACKEND_URL + "/auth/google/callback"
   );
   try {
-    const ticket = await oAuth2Client.verifyIdToken({
-      idToken: token,
-      audience: GOOGLE_CLIENT_ID,
-    });
+    const ticket = await oAuth2Client
+      .verifyIdToken({
+        idToken: token,
+        audience: GOOGLE_CLIENT_ID,
+      })
+      .catch((error) => {
+        return null;
+      });
     if (!ticket) {
       return null;
     }

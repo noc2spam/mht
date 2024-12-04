@@ -20,8 +20,11 @@ export default async function handler(req: Request, res: Response) {
     NEXT_PUBLIC_BACKEND_URL + "/auth/google/callback"
   );
   try {
-    const response = await oAuth2Client.getToken(code);
-    if (!response.tokens) {
+    const response = await oAuth2Client.getToken(code).catch((error) => {
+      console.error(error);
+      return undefined;
+    });
+    if (!response || !response.tokens) {
       return res.status(400).json({ status: "error", message: "Invalid code" });
     }
     const { tokens } = response;
@@ -53,6 +56,5 @@ export default async function handler(req: Request, res: Response) {
     res.redirect(redirectURL);
   } catch (error) {
     console.error(error);
-    res.redirect(`${FRONTEND_URL}/`);
   }
 }
