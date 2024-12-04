@@ -50,7 +50,7 @@ export default function RatingInput({
   const [rating, setRating] = useState<number | undefined>(value);
   const hiddenInput = useRef(null);
   return (
-    <>
+    <div className="my-2">
       <input
         ref={hiddenInput}
         name={name}
@@ -82,15 +82,15 @@ export default function RatingInput({
             >
               <AppIcon
                 name="star"
-                className="w-full max-w-8 h-full text-white"
+                className="w-full max-w-4 h-full text-white"
               />
             </button>
-            <div className="text-xs w-full text-center text-wrap text-gray-500 md:block hidden">
+            <div className="text-xs w-full text-center text-wrap text-gray-500 md:grid place-items-start place-content-center hidden mt-2">
               {ratingInWords[i]}
             </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -81,224 +81,228 @@ export default function ActivityPopup() {
             }
           }}
         >
-          <div className="relative w-[850px] max-w-[80vw] h-[600px] bg-white p-6 border border-gray-100 rounded-xl text-gray-800 flex flex-col items-start justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold">Create a new log</h2>
-              <p className="text-gray-500">Step {visibleIndex + 1} of 5</p>
-              <button
-                onClick={() => setShown(false)}
-                className="absolute top-2 right-2"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+          <div className="relative w-[1050px] max-w-[80vw] min-h-[600px] bg-white p-6 border border-gray-100 rounded-xl text-gray-800 flex flex-col justify-between">
+            <div className="flex flex-col items-start gap-4 justify-start [&_label]:text-2xl [&_label]:font-medium">
+              <div>
+                <h2 className="text-2xl font-semibold">Create a new log</h2>
+                <p className="text-gray-500 text-xs">
+                  Step {visibleIndex + 1} of 5
+                </p>
+                <button
+                  onClick={() => setShown(false)}
+                  className="absolute top-2 right-2"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="w-full">
-              {visibleIndex === 0 && (
-                <div>
-                  <label htmlFor="mood_rating">How is your mood today?</label>
-                  <RatingInput
-                    name="mood_rating"
-                    id="mood_rating"
-                    value={formData.mood_rating}
-                    onChange={(rating: number) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        mood_rating: Number(rating),
-                      }));
-                    }}
-                  />
-                </div>
-              )}
-              {visibleIndex === 1 && (
-                <div>
-                  <label htmlFor="anxiety_level">
-                    What is your anxiety level today?
-                  </label>
-
-                  <RatingInput
-                    name="anxiety_level"
-                    id="anxiety_level"
-                    value={formData.anxiety_level}
-                    ratingInWords={{
-                      0: "Extremely Anxious",
-                      1: "Very Anxious",
-                      2: "Anxious",
-                      3: "Moderately Anxious",
-                      4: "Slightly Anxious",
-                      5: "Neutral",
-                      6: "Slightly Relaxed",
-                      7: "Moderately Relaxed",
-                      8: "Relaxed",
-                      9: "Very Relaxed",
-                      10: "Extremely Relaxed",
-                    }}
-                    onChange={(rating: number) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        anxiety_level: Number(rating),
-                      }));
-                    }}
-                  />
-                </div>
-              )}
-              {visibleIndex === 2 && (
-                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="w-full">
+                {visibleIndex === 0 && (
                   <div>
-                    <label htmlFor="sleep_hours">
-                      How many hours did you sleep last night?
-                    </label>
-                    <SliderInput
-                      name="sleep_hours"
-                      id="sleep_hours"
-                      min={0}
-                      max={24}
-                      value={formData.sleep_hours}
-                      suffix="hours"
-                      onChange={(value: number) => {
+                    <label htmlFor="mood_rating">How is your mood today?</label>
+                    <RatingInput
+                      name="mood_rating"
+                      id="mood_rating"
+                      value={formData.mood_rating}
+                      onChange={(rating: number) => {
                         setFormData((prev) => ({
                           ...prev,
-                          sleep_hours: value,
+                          mood_rating: Number(rating),
                         }));
                       }}
                     />
                   </div>
-                  {formData &&
-                  formData.sleep_hours &&
-                  formData.sleep_hours > 0 ? (
+                )}
+                {visibleIndex === 1 && (
+                  <div>
+                    <label htmlFor="anxiety_level">
+                      What is your anxiety level today?
+                    </label>
+
+                    <RatingInput
+                      name="anxiety_level"
+                      id="anxiety_level"
+                      value={formData.anxiety_level}
+                      ratingInWords={{
+                        0: "Extremely Anxious",
+                        1: "Very Anxious",
+                        2: "Anxious",
+                        3: "Moderately Anxious",
+                        4: "Slightly Anxious",
+                        5: "Neutral",
+                        6: "Slightly Relaxed",
+                        7: "Moderately Relaxed",
+                        8: "Relaxed",
+                        9: "Very Relaxed",
+                        10: "Extremely Relaxed",
+                      }}
+                      onChange={(rating: number) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          anxiety_level: Number(rating),
+                        }));
+                      }}
+                    />
+                  </div>
+                )}
+                {visibleIndex === 2 && (
+                  <div>
                     <div>
                       <label htmlFor="sleep_hours">
-                        How satisfied are you with the quality of your sleep?
+                        How many hours did you sleep last night?
                       </label>
-                      <RatingInput
-                        value={formData.sleep_quality}
-                        name="sleep_quality"
-                        id="sleep_quality"
-                        ratingInWords={{
-                          1: "Very Dissatisfied",
-                          2: "Dissatisfied",
-                          3: "Slightly Dissatisfied",
-                          4: "Dissatisfied",
-                          5: "Neutral",
-                          6: "Almost Satisfied",
-                          7: "Satisfied",
-                          8: "Fairly Satisfied",
-                          9: "Very Satisfied",
-                          10: "Perfect sleep",
-                        }}
-                        onChange={(rating: number) => {
+                      <SliderInput
+                        name="sleep_hours"
+                        id="sleep_hours"
+                        min={0}
+                        max={24}
+                        value={formData.sleep_hours}
+                        suffix="hours"
+                        onChange={(value: number) => {
                           setFormData((prev) => ({
                             ...prev,
-                            sleep_quality: Number(rating),
+                            sleep_hours: value,
                           }));
                         }}
                       />
                     </div>
-                  ) : undefined}
-                  {formData &&
-                  formData.sleep_hours &&
-                  formData.sleep_hours > 0 ? (
-                    <div>
-                      <label>
-                        Did you experience any disturbances during sleep?
-                      </label>
-                      <RadioInput
-                        name="disturbances"
-                        defaultValue={formData.disturbances}
-                        options={[
-                          { value: "yes", label: "Yes" },
-                          { value: "no", label: "No" },
-                        ]}
-                        onChange={(value) => {
-                          setFormData((prev) => ({
-                            ...prev,
-                            disturbances: value.target.value as "yes" | "no",
-                          }));
-                        }}
-                      />
-                    </div>
-                  ) : undefined}
-                </div>
-              )}
-              {visibleIndex === 3 && (
-                <div>
-                  <label htmlFor="">
-                    Did you do any physical activity today?
-                  </label>
-                  <Select
-                    name="activity_type"
-                    id="activity_type"
-                    options={[
-                      { value: "none", label: "None" },
-                      { value: "light", label: "Light" },
-                      { value: "moderate", label: "Moderate" },
-                      { value: "heavy", label: "Heavy" },
-                    ]}
-                    onChange={(e) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        activity_type: e.target.value as
-                          | "none"
-                          | "light"
-                          | "moderate"
-                          | "heavy",
-                      }));
-                    }}
-                  />
-                  {formData.activity_type !== "none" && (
-                    <>
-                      <label htmlFor="activity_duration">
-                        How many hours?
-                        <SliderInput
-                          name="activity_duration"
-                          id="activity_duration"
-                          min={0}
-                          max={24}
-                          suffix="hours"
-                          onChange={(value: number) => {
+                    {formData &&
+                    formData.sleep_hours &&
+                    formData.sleep_hours > 0 ? (
+                      <div>
+                        <label htmlFor="sleep_hours">
+                          How satisfied are you with the quality of your sleep?
+                        </label>
+                        <RatingInput
+                          value={formData.sleep_quality}
+                          name="sleep_quality"
+                          id="sleep_quality"
+                          ratingInWords={{
+                            1: "Very Dissatisfied",
+                            2: "Dissatisfied",
+                            3: "Slightly Dissatisfied",
+                            4: "Dissatisfied",
+                            5: "Neutral",
+                            6: "Almost Satisfied",
+                            7: "Satisfied",
+                            8: "Fairly Satisfied",
+                            9: "Very Satisfied",
+                            10: "Perfect sleep",
+                          }}
+                          onChange={(rating: number) => {
                             setFormData((prev) => ({
                               ...prev,
-                              activity_duration: value,
+                              sleep_quality: Number(rating),
                             }));
                           }}
                         />
-                      </label>
-                    </>
-                  )}
-                </div>
-              )}
-              {visibleIndex === 4 && (
-                <div>
-                  <label htmlFor="">
-                    How many hours did you spend with your friends?
-                  </label>
-                  <SliderInput
-                    name="socialized_for"
-                    id="socialized_for"
-                    min={0}
-                    max={24}
-                    suffix="hours"
-                    onChange={(value: number) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        socialized_for: value,
-                      }));
-                    }}
-                  />
-                </div>
-              )}
+                      </div>
+                    ) : undefined}
+                    {formData &&
+                    formData.sleep_hours &&
+                    formData.sleep_hours > 0 ? (
+                      <div>
+                        <label>
+                          Did you experience any disturbances during sleep?
+                        </label>
+                        <RadioInput
+                          name="disturbances"
+                          defaultValue={formData.disturbances}
+                          options={[
+                            { value: "yes", label: "Yes" },
+                            { value: "no", label: "No" },
+                          ]}
+                          onChange={(value) => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              disturbances: value.target.value as "yes" | "no",
+                            }));
+                          }}
+                        />
+                      </div>
+                    ) : undefined}
+                  </div>
+                )}
+                {visibleIndex === 3 && (
+                  <div>
+                    <label htmlFor="">
+                      Did you do any physical activity today?
+                    </label>
+                    <Select
+                      name="activity_type"
+                      id="activity_type"
+                      options={[
+                        { value: "none", label: "None" },
+                        { value: "light", label: "Light" },
+                        { value: "moderate", label: "Moderate" },
+                        { value: "heavy", label: "Heavy" },
+                      ]}
+                      onChange={(e) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          activity_type: e.target.value as
+                            | "none"
+                            | "light"
+                            | "moderate"
+                            | "heavy",
+                        }));
+                      }}
+                    />
+                    {formData.activity_type !== "none" && (
+                      <>
+                        <label htmlFor="activity_duration">
+                          How many hours?
+                          <SliderInput
+                            name="activity_duration"
+                            id="activity_duration"
+                            min={0}
+                            max={24}
+                            suffix="hours"
+                            onChange={(value: number) => {
+                              setFormData((prev) => ({
+                                ...prev,
+                                activity_duration: value,
+                              }));
+                            }}
+                          />
+                        </label>
+                      </>
+                    )}
+                  </div>
+                )}
+                {visibleIndex === 4 && (
+                  <div>
+                    <label htmlFor="">
+                      How many hours did you spend with your friends?
+                    </label>
+                    <SliderInput
+                      name="socialized_for"
+                      id="socialized_for"
+                      min={0}
+                      max={24}
+                      suffix="hours"
+                      onChange={(value: number) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          socialized_for: value,
+                        }));
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex justify-between mt-4 gap-4">
               <button

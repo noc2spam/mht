@@ -5,10 +5,10 @@ body {
   @apply bg-[#dee1c9];
 }
 h1 {
-  @apply font-bold text-[2.7rem] leading-[3.1rem];
+  @apply font-bold text-3xl;
 }
 h2 {
-  @apply font-bold text-4xl leading-[3.2rem];
+  @apply font-bold text-4xl;
 }
 h3 {
   @apply text-3xl font-semibold;
@@ -20,7 +20,7 @@ p,
 button,
 h5,
 li {
-  @apply font-normal text-lg md:text-xl tracking-tight leading-[2rem];
+  @apply font-normal text-lg md:text-xl;
 }
 label {
   @apply font-normal;
@@ -28,20 +28,7 @@ label {
 small {
   @apply text-lg font-normal sm:text-xs;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-button {
-  @apply my-1;
-}
-p {
-  @apply my-4;
-}
-li {
-  @apply my-2;
-}
+
 b,
 strong {
   @apply font-medium;
